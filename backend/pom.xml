@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.hangamastream</groupId>
-	<artifactId>hangamastream</artifactId>
+	<artifactId>HangamaStream</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hangamastream</name>
-	<description>Demo project for Spring Boot</description>
+	<name>HangamaStream</name>
+	<description>HangamaStream using NextJS and SpringBoot 3.0</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
