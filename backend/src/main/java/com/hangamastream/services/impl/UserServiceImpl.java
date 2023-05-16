@@ -4,19 +4,19 @@ import java.util.concurrent.CompletableFuture;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.hangamastream.config.jwt.JwtResponse;
-import com.hangamastream.config.jwt.JwtTokenProvider;
+import com.hangamastream.config.UserDetailsServiceImpl;
+import com.hangamastream.config.jwt.JwtProvider;
 import com.hangamastream.exceptions.ResourceNotFound;
 import com.hangamastream.models.user.User;
 import com.hangamastream.models.user.forms.UpdateUserForm;
@@ -34,13 +34,15 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepo;
     private final BCryptPasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtProvider jwtTokenProvider;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    public UserServiceImpl(UserRepository userRepo, BCryptPasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public UserServiceImpl(UserRepository userRepo, BCryptPasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtProvider jwtTokenProvider, UserDetailsServiceImpl userDetailsService) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
+        this.userDetailsService = userDetailsService;
     }
 
     private void checkIfUserAlreadyExists(String email) {
@@ -96,11 +98,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Async
     public CompletableFuture<JwtResponse> authenticateUser(UserLoginForm loginForm) {
-        this.getUser(loginForm.getEmail()).join();
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(loginForm.getEmail());
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword());
         try {
             authenticationManager.authenticate(authenticationToken);
-            String generatedJwtToken = this.jwtTokenProvider.generateToken(authenticationToken);
+            String generatedJwtToken = this.jwtTokenProvider.generateToken(userDetails);
             JwtResponse jwtResponse = new JwtResponse();
             jwtResponse.setToken(generatedJwtToken);
             return CompletableFuture.completedFuture(jwtResponse);

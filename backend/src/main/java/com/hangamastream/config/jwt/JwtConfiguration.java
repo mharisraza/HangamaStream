@@ -15,11 +15,8 @@ public class JwtConfiguration {
     @Value("${jwt.token.prefix}")
     private String jwtTokenPrefix;
 
-    @Value("${jwt.token.expiration}")
+    @Value("${jwt.token.expiration.time}")
     private Long jwtTokenExpirationTime;
-
-    @Value("${jwt.header}")
-    private String header;
 
     public String getJwtTokenPrefix() {
         return jwtTokenPrefix + " ";

@@ -22,22 +22,22 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<?> handleResponseStatusException(HttpServletRequest request, ResponseStatusException ex) {
         Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("Status:", ex.getStatusCode());
-        errorResponse.put("Errors:", ex.getReason());
-        errorResponse.put("Message:", ex.getMessage());
-        errorResponse.put("Path:", request.getServletPath());
+        errorResponse.put("Status", ex.getStatusCode());
+        errorResponse.put("Error", ex.getReason());
+        errorResponse.put("Message", ex.getMessage());
+        errorResponse.put("Path", request.getServletPath());
         return ResponseEntity.status(ex.getStatusCode()).contentType(MediaType.APPLICATION_JSON).body(errorResponse);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException(HttpServletRequest request, MethodArgumentNotValidException ex) {
         Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("Status:", ex.getStatusCode());
-        errorResponse.put("Path:", request.getServletPath());
+        errorResponse.put("Status", ex.getStatusCode());
+        errorResponse.put("Path", request.getServletPath());
 
         Map<String, String> fieldErrors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach((error) -> fieldErrors.put(error.getField(), error.getDefaultMessage()));
-        errorResponse.put("Field Errors:", fieldErrors);
+        errorResponse.put("Field Errors", fieldErrors);
 
         return ResponseEntity.status(ex.getStatusCode()).contentType(MediaType.APPLICATION_JSON).body(errorResponse);
     }
@@ -45,9 +45,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFound.class)
     public ResponseEntity<?> handleResourceNotFoundException(HttpServletRequest request, ResourceNotFound ex) {
         Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("Status:", HttpStatus.BAD_REQUEST);
-        errorResponse.put("Path:", request.getServletPath());   
-        errorResponse.put("Message:", ex.getMessage());
+        errorResponse.put("Status", HttpStatus.BAD_REQUEST);
+        errorResponse.put("Path", request.getServletPath());   
+        errorResponse.put("Message", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON).body(errorResponse);  
     }
     

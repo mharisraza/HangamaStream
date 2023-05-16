@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hangamastream.config.jwt.JwtResponse;
-import com.hangamastream.models.user.User;
 import com.hangamastream.models.user.forms.UserLoginForm;
 import com.hangamastream.models.user.forms.UserRegisterForm;
 import com.hangamastream.services.UserService;
@@ -28,8 +27,8 @@ public class AppController {
 
     @PostMapping(path = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegisterForm registerForm) {
-        User createdUser = this.userService.createUser(registerForm).join();
-        return ResponseEntity.ok(createdUser);
+        this.userService.createUser(registerForm).join();
+        return ResponseEntity.ok("User registered successfully.");
     }
     
 }
