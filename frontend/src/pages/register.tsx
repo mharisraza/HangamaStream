@@ -1,4 +1,3 @@
-import AlertBox from "@/components/AlertBox";
 import Base from "@/components/Base";
 import { RegisterUser } from "@/services/UserService";
 import UserFormData from "@/types/UserFormData";
@@ -69,6 +68,7 @@ const Register = () => {
 
         RegisterUser(data).then((response) => {
           setData({email: '', password:''})
+          router.push('/login');
           setAlert({type: 'success', message: response});
         }).catch((error) => {
           const fieldErrors = error?.response?.data['Field Errors'];
@@ -112,13 +112,12 @@ const Register = () => {
                   </button>
                 </div>
               )}
-              <div className="card mb-5">
-                <div className="card-header">Register</div>
+              <div style={{ width: '75%', marginLeft: 'auto', marginRight: 'auto'}} className="card mb-5">
+                <div className="card-header text-center fw-bold shadow">Register to HangamaStream</div>
                 <div className="card-body">
                   <form onSubmit={submitForm}>
 
                     <div className="form-group mb-4">
-                    <label>Email Address</label>
                     <input name="email" type="email" placeholder="Email Address" className={`form-control ${error.errors.email?.length !== 0 ? 'is-invalid' : ''}`} onChange={(e) => handleFieldValueChange(e)} value={data.email}/>
 
                     <div className="invalid-feedback">
@@ -127,7 +126,6 @@ const Register = () => {
                     </div>
 
                     <div className="form-group  mb-4">
-                    <label>Password</label>
                     <input name="password" type="password" placeholder="Your Password" className={`form-control ${error.errors.password?.length !== 0 ? 'is-invalid' : ''}`} onChange={(e) => handleFieldValueChange(e)} value={data.password} />
 
                     <div className="invalid-feedback">{error.errors.password}</div>
@@ -135,7 +133,7 @@ const Register = () => {
                     </div>
 
                     <div className="container text-center">
-                        <button type="submit" className="btn btn-success w-100 p-2 mb-3">Register</button>
+                        <button type="submit" className="btn btn-primary w-100 p-2 mb-3 fw-bold">Register</button>
                         <span>Already have an account?</span> <Link href="/login">Login here.</Link>
                     </div>
 

@@ -4,16 +4,11 @@ import UserFormData from "@/types/UserFormData";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { stringify } from "querystring";
-import { ChangeEvent, FormEventHandler, useState } from "react";
+import { ChangeEvent, FormEventHandler, useContext, useState } from "react";
 
 const Login = () => {
 
   const router = useRouter();
-
-  const [alert, setAlert] = useState({
-    type: "",
-    message: "",
-  });
 
   const [data, setData] = useState<UserFormData>({
     email: "",
@@ -60,16 +55,12 @@ const Login = () => {
 
     LoginUser(data)
       .then((response) => {
-        localStorage.setItem("jwtToken", response.token);
-        router.push('/');
+        localStorage.setItem("token", response.token);
       })
       .catch((error) => {
-        console.log("Error response" + error['response'])
         if(error['response'] === undefined) {
-          setAlert({type: 'danger', message: 'Something went wrong, please try later.'})
           return;
         } 
-        setAlert({type: 'danger', message: error?.response?.data?.Error ? error.response.data.Error : error?.response?.data?.Message})
       });
   };
 
@@ -89,33 +80,16 @@ const Login = () => {
         <div className="container mt-100">
           <div className="row d-flex justify-content-center">
             <div className="col-md-6">
-              {alert?.message.length !== 0 && (
-                <div
-                  className={`alert alert-${alert.type} alert-dismissible fade show`}
-                >
-                  {alert.message}
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="alert"
-                    aria-label="Close"
-                    onClick={() => setAlert({ type: "", message: "" })}
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              )}
-              <div className="card mb-5">
-                <div className="card-header">Login</div>
+              <div style={{ width: '75%', marginLeft: 'auto', marginRight: 'auto' }} className="card mb-5 shadow">
+                <div className="card-header text-center shadow fw-bold">Login to Hangama</div>
                 <div className="card-body">
                   <form onSubmit={submitForm}>
                     <div className="form-group mb-4">
-                      <label>Email Address</label>
                       <input
                         name="email"
                         type="text"
                         placeholder="Email Address"
-                        className={`form-control ${
+                        className={`form-control mt-1 ${
                           error?.errors?.email.length !== 0 ? "is-invalid" : ""
                         }`}
                         onChange={(event) => handleFieldValueChange(event)}
@@ -128,7 +102,6 @@ const Login = () => {
                     </div>
 
                     <div className="form-group  mb-4">
-                      <label>Password</label>
                       <input
                         name="password"
                         type="password"
@@ -144,13 +117,13 @@ const Login = () => {
                     </div>
 
                     <div className="container text-center">
-                      <button type="submit" className="btn btn-primary w-100 p-2 mb-3">
-                        Login
+                      <button type="submit" className="btn btn-primary w-100 p-2 mb-3 fw-bold">
+                        Login <i className="fas fa-sign-in"></i>
                       </button>
+                      <br />
                       <span>Forgor your password? Reset now</span>
                       <br />
-                      <span className="m">Don't you have an account?</span>
-                      <Link href="/register">Register Here.</Link>
+
                     </div>
                   </form>
                 </div>

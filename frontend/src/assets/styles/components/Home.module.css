@@ -1,0 +1,19 @@
+.hero {
+    padding: 120px 100px;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.start_streaming_btn {
+    border: 1px solid red;
+    color: white;
+    padding: 10px 40px 10px;
+}
+
+.start_streaming_btn:hover {
+    border: 1px solid red;
+    color: white;
+    background-color: #e50914;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

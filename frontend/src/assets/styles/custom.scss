@@ -1,0 +1,10 @@
+// Import Bootstrap SCSS
+@import '../../../node_modules/bootstrap/scss/functions';
+@import '../../../node_modules/bootstrap/scss/variables';
+
+
+$theme-colors: (
+  primary: #e50914
+);
+
+@import '../../../node_modules/bootstrap/scss/bootstrap';

@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Poppins:ital,wght@0,300;1,200&display=swap');
+
+* {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #191717;
+    background-size: cover;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
+.card {
+    background: #2c2b2b;
+    color: white;
+}
+
+.form-control {
+    background-color: #161515 !important;
+    border: none;
+    padding: 12px;
+    color: white !important;
+}
+
+.btn {
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}

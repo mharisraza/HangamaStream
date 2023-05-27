@@ -1,5 +1,5 @@
 import UserFormData from "@/types/UserFormData";
-import { apiCaller } from "./Helper"
+import { apiCaller } from "../config/config"
 
 export const RegisterUser = (data: UserFormData) => {
     return apiCaller.post('/register', data).then((response) => response.data);
