@@ -12,3 +12,9 @@ module.exports = {
     includePaths: [path.join(__dirname, 'assets/styles')],
   },
 }
+
+module.exports = {
+  images: {
+    domains: ['www.themoviedb.org'],
+  },
+};

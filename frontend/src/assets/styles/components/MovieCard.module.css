@@ -1,0 +1,78 @@
+.item {
+    position: relative; 
+    overflow: hidden;
+    margin-bottom: 10px; /* Adjust the vertical gap between the images */
+}
+
+.item .itemPoster {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 3px;
+    width: auto;
+    height: auto;
+    margin-bottom: -2px;
+    
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    
+}
+
+
+.item:hover .itemPoster {
+    opacity: 0.1;
+  }
+
+
+.item:hover {
+    cursor: pointer;
+}
+  
+  .playIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+  
+  .item:hover .playIcon {
+    display: block;
+  }
+  
+  .playIcon i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: white;
+    opacity: 0.8;
+  }
+
+  .item_information {
+    font-size: 12px;
+    display: block;
+    background: #2c2b2b;
+    padding: 7px 5px 1px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .item_information:hover a {
+    color: #e50914 !important;
+  }
+
+  .itemCountryFlag {
+    width: 12px;
+    height: 12px;
+    float: left;
+    margin-right: 5px;
+    margin-top: -1px;
+  }
+
+  
