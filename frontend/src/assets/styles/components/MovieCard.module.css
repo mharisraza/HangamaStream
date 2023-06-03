@@ -1,78 +1,132 @@
 .item {
-    position: relative; 
-    overflow: hidden;
-    margin-bottom: 10px; /* Adjust the vertical gap between the images */
-}
-
-.item .itemPoster {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 3px;
-    width: auto;
-    height: auto;
-    margin-bottom: -2px;
-    
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    -ms-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    transition: all .5s ease;
-    
-}
-
-
-.item:hover .itemPoster {
-    opacity: 0.1;
-  }
-
-
-.item:hover {
-    cursor: pointer;
-}
-  
-  .playIcon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-  }
-  
-  .item:hover .playIcon {
-    display: block;
-  }
-  
-  .playIcon i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 50px;
-    color: white;
-    opacity: 0.8;
-  }
-
-  .item_information {
-    font-size: 12px;
-    display: block;
+    font-size: 0.7em;
+    margin: 5px;
     background: #2c2b2b;
-    padding: 7px 5px 1px;
-    margin-bottom: 5px;
+    padding-bottom: 5px;
     border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 225px;
+    transition: opacity 10s ease;
+    /* Add transition */
+
+
+}
+
+.item img {
+    max-width: 225px;
+    width: 225px;
+    border-radius: 3px;
+    transition: opacity 0.1s ease;
+    /* Add transition */
+
+}
+
+.item img:hover {
+    cursor: pointer;
+    opacity: 0.7 !important;
+}
+
+.movie_info {
+    padding: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie_info a {
     color: white;
     text-decoration: none;
-  }
+}
 
-  .item_information:hover a {
-    color: #e50914 !important;
-  }
+.movie_info:hover a {
+    color: #e50914;
+}
 
-  .itemCountryFlag {
-    width: 12px;
-    height: 12px;
-    float: left;
-    margin-right: 5px;
-    margin-top: -1px;
-  }
+.movie_info_split {
+    display: flex;
+    color: white;
+    font-size: 0.85em;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
-  
+.movie_info_split>div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    line-height: 20px;
+}
+
+.movie_info_split>div+div {
+    margin-left: 0.3rem;
+}
+
+.movieRate i {
+    color: yellow;
+}
+
+
+
+.movie_thumbnail {
+    position: relative;
+}
+
+.play_button {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 35px;
+    display: none;
+    opacity: 0;
+    /* Start with opacity 0 */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+.play_button.fade-in {
+    animation: playButtonFadeIn 0.3s ease forwards;
+}
+
+@keyframes playButtonFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(100%);
+        /* Start position below the thumbnail */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0%);
+        /* End position at the top */
+    }
+}
+
+.play_button i {
+    margin: 0;
+    /* Reset default margin for the play button icon */
+}
+
+.item img:hover,
+.item:hover img {
+    cursor: pointer;
+    opacity: 0.7 !important;
+}
+
+
+.movie_thumbnail:hover .play_button {
+    display: flex;
+    /* show the play button on hover */
+    animation: playButtonFadeIn 0.3s ease forwards;
+}

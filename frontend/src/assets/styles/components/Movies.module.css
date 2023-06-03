@@ -1,5 +1,20 @@
-.item_container {
-    padding: 5 10px;
-    margin-top: 20px;
+.scrollable_container {
+    position: relative;
+    overflow-x: scroll;
+  }
+
+.scrollable_item_container {
+    display: inline-flex;
 }
 
+.item_container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item_section_title {
+  border-left: 3px solid #e50914;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}

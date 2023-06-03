@@ -4,6 +4,7 @@
     scroll-behavior: smooth;
     font-family: 'Inter', sans-serif;
     font-family: 'Poppins', sans-serif;
+
 }
 
 body {
@@ -20,8 +21,6 @@ body {
     color: white;
 }
 
-  
-
 .form-control {
     background-color: #161515 !important;
     border: none;
@@ -36,3 +35,28 @@ body {
 .btn:hover {
     transform: translateY(-1px);
 }
+
+
+/* width and color of the scrollbar track */
+::-webkit-scrollbar {
+    width: 5px !important;
+    background: transparent;
+  }
+  
+  /* scrollbar handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+  
+  /* scrollbar handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background-color: #555;
+  }
+  
+  /* scrollbar track when scrolling */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
